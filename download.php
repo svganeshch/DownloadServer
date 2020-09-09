@@ -1,6 +1,7 @@
 <?php
-include './config/dbconn.php';
-include './utils/fileFuncs.php';
+$path = $_SERVER['DOCUMENT_ROOT'];
+include "$path"."/config/dbconn.php";
+include "$path"."/utils/fileFuncs.php";
 
 if (isset($_POST['file_sha256']) && isset($_POST['version']) && isset($_POST['variant'])) {
     $file_sha256 = $_POST['file_sha256'];
