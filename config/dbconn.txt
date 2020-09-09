@@ -1,0 +1,10 @@
+<?php
+define("DB_HOST", "localhost");
+define("DB_NAME", "downloads");
+define("DB_USER", "root");
+define("DB_PASSWORD", "");
+
+define("TIME_BEFORE_EXPIRE", 2); // in hours
+define("BUILD_FILES_DIRECTORY", "./builds");
+define("SERVER_DOWN_URL", "http://localhost/downloader/");
+?>
