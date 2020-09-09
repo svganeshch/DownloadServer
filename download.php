@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $insertedData = insertFileUrl($file->file_sha256);
                 $token_identifier = $insertedData['token_identifier'];
             }
-            exit(SERVER_DOWN_URL."download.php?token={$token_identifier}?version={$file_version}?variant={$file_variant}");
+            exit(SERVER_DOWN_URL."download.php?token={$token_identifier}&version={$file_version}&variant={$file_variant}");
         } else {
             exit("No file exists or no longer available");
         }
