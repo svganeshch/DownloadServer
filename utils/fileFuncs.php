@@ -1,6 +1,6 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'];
-include "$path"."/config/dbconn.php";
+include_once "$path"."/config/dbconn.php";
 
 try {
     $db_conn = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
