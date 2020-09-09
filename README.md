@@ -21,5 +21,5 @@ CREATE TABLE `downloads`.`arrow-10.0_files_official` ( `id` INT NOT NULL AUTO_IN
 
 <b>File URLs table:</b>
 ```
-CREATE TABLE `downloads`.`file_urls` ( `id` INT NOT NULL AUTO_INCREMENT , `file_sha256` VARCHAR(64) NOT NULL , `token_identifier` VARCHAR(64) NOT NULL , `time_before_expire` TIMESTAMP NOT NULL , `ip_address` VARCHAR(20) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `downloads`.`file_urls` ( `id` INT NOT NULL AUTO_INCREMENT , `file_sha256` VARCHAR(64) NOT NULL , `token_identifier` VARCHAR(64) NOT NULL , `time_before_expire` INT NOT NULL , `ip_address` VARCHAR(20) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ```
