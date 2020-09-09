@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (
         isset($_GET['token']) && !empty($_GET['token'])
         && isset($_GET['version']) && !empty($_GET['version'])
