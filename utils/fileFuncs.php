@@ -60,6 +60,13 @@ function getFileUrlByToken($token_identifier) {
     return $file_url;
 }
 
+function dropFileUrlByToken($token_identifier) {
+    global $db_conn;
+
+    $query = $db_conn->prepare("DELETE FROM `file_urls` where token_identifier='{$token_identifier}'");
+    $query->execute();
+}
+
 function randStr($length = 60) {
     return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
 }

@@ -7,4 +7,5 @@ define("DB_PASSWORD", "");
 define("TIME_BEFORE_EXPIRE", 2); // in hours
 define("BUILD_FILES_DIRECTORY", "./builds");
 define("SERVER_DOWN_URL", "http://localhost/downloader/");
+define("DOWNLOAD_PAGE_URL", "https://example.com");
 ?>

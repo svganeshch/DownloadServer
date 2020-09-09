@@ -38,7 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $file_url = getFileUrlByToken($file_token);
 
         if (!$file_url) exit("There are no downloads available for this token!");
-        if ($file_url->time_before_expire < time()) exit("Link expired!");
+
+        if ($file_url->time_before_expire < time()) {
+            dropFileUrlByToken($file_token);
+            exit("Token expired, please generate a new link from " . DOWNLOAD_PAGE_URL);
+        }
 
         $file = getFileBySHA($file_url->file_sha256, $file_version, $file_variant);
 
