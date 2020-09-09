@@ -13,7 +13,7 @@ try {
 function getFileBySHA($file_sha256, $version, $variant) {
     global $db_conn;
 
-    $query = $db_conn->prepare("SELECT * FROM '{$version}_files_{$variant}' where file_sha256='{$file_sha256}'");
+    $query = $db_conn->prepare("SELECT * FROM `{$version}_files_{$variant}` where file_sha256='{$file_sha256}'");
     $query->execute();
     $results = $query->setFetchMode(PDO::FETCH_OBJ);
 
