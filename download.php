@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $insertedData = insertFileUrl($file->file_sha256);
                 $token_identifier = $insertedData['token_identifier'];
             }
-            exit(SERVER_DOWN_URL."download.php?token={$token_identifier}&version={$file_version}&variant={$file_variant}");
+            exit(SERVER_DOWN_URL . "download.php?token={$token_identifier}&version={$file_version}&variant={$file_variant}");
         } else {
             exit("No file exists or no longer available");
         }
@@ -46,15 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $filename = urldecode($file->filename);
             $filepath = BUILD_FILES_DIRECTORY . '/' . $filename;
 
-            header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename="' . basename($filepath) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($filepath));
-            flush(); // Flush system output buffer
-            readfile($filepath);
+            header('X-Sendfile: ' . $filepath);
             exit;
         }
     }
