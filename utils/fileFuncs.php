@@ -26,11 +26,11 @@ function getFileBySHA($file_sha256, $version, $variant) {
     return $file;
 }
 
-function getFileUrl($file_sha256)
+function getFileUrl($file_sha256, $version, $variant)
 {
     global $db_conn;
 
-    $query = $db_conn->prepare("SELECT * FROM file_urls where file_sha256='{$file_sha256}' and ip_address='" . $_SERVER['REMOTE_ADDR'] . "' and time_before_expire >= '" . time() . "'");
+    $query = $db_conn->prepare("SELECT * FROM `{$version}_file_urls_{$variant}` where file_sha256='{$file_sha256}' and ip_address='" . $_SERVER['REMOTE_ADDR'] . "' and time_before_expire >= '" . time() . "'");
 
     $query->execute();
     $results = $query->setFetchMode(PDO::FETCH_OBJ);
@@ -44,10 +44,10 @@ function getFileUrl($file_sha256)
     return $file_url;
 }
 
-function getFileUrlByToken($token_identifier) {
+function getFileUrlByToken($token_identifier, $version, $variant) {
     global $db_conn;
 
-    $query = $db_conn->prepare("SELECT * FROM file_urls where token_identifier='{$token_identifier}'");
+    $query = $db_conn->prepare("SELECT * FROM `{$version}_file_urls_{$variant}` where token_identifier='{$token_identifier}'");
     $query->execute();
     $results = $query->setFetchMode(PDO::FETCH_OBJ);
 
@@ -60,10 +60,10 @@ function getFileUrlByToken($token_identifier) {
     return $file_url;
 }
 
-function dropFileUrlByToken($token_identifier) {
+function dropFileUrlByToken($token_identifier, $version, $variant) {
     global $db_conn;
 
-    $query = $db_conn->prepare("DELETE FROM `file_urls` where token_identifier='{$token_identifier}'");
+    $query = $db_conn->prepare("DELETE FROM `{$version}_file_urls_{$variant}` where token_identifier='{$token_identifier}'");
     $query->execute();
 }
 
@@ -71,7 +71,7 @@ function randStr($length = 60) {
     return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
 }
 
-function insertFileUrl($file_sha256) {
+function insertFileUrl($file_sha256, $version, $variant) {
     global $db_conn;
 
     $data = [
@@ -81,7 +81,7 @@ function insertFileUrl($file_sha256) {
         'ip_address' => $_SERVER['REMOTE_ADDR']
     ];
 
-    $sql = "INSERT INTO file_urls (file_sha256, token_identifier, time_before_expire, ip_address) VALUES (:file_sha256, :token_identifier, :time_before_expire, :ip_address)";
+    $sql = "INSERT INTO `{$version}_file_urls_{$variant}` (file_sha256, token_identifier, time_before_expire, ip_address) VALUES (:file_sha256, :token_identifier, :time_before_expire, :ip_address)";
     $query = $db_conn->prepare($sql);
     $query->execute($data);
 

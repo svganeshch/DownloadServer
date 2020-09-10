@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $file = getFileBySHA($file_sha256, $file_version, $file_variant);
 
         if ($file) {
-            if ($data = getFileUrl($file->file_sha256)) {
+            if ($data = getFileUrl($file->file_sha256, $file_version, $file_variant)) {
                 $token_identifier = $data->token_identifier;
             } else {
-                $insertedData = insertFileUrl($file->file_sha256);
+                $insertedData = insertFileUrl($file->file_sha256, $file_version, $file_variant);
                 $token_identifier = $insertedData['token_identifier'];
             }
             exit(SERVER_DOWN_URL . "download.php?token={$token_identifier}&version={$file_version}&variant={$file_variant}");
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $file = BUILD_FILES_DIRECTORY . '/' . $file_version . '/' . $file_variant . '/' . $filename;
             if (file_exists($file) && $file_sha256 === hash_file("sha256", $file)) {
                 if (insertNewFile($file_sha256, $filename, $file_version, $file_variant)) {
-                    $insertedData = insertFileUrl($file_sha256);
+                    $insertedData = insertFileUrl($file_sha256, $file_version, $file_variant);
                     $token_identifier = $insertedData['token_identifier'];
 
                     exit(SERVER_DOWN_URL . "download.php?token={$token_identifier}&version={$file_version}&variant={$file_variant}");
@@ -48,12 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $file_token = $_GET['token'];
         $file_version = $_GET['version'];
         $file_variant = $_GET['variant'];
-        $file_url = getFileUrlByToken($file_token);
+        $file_url = getFileUrlByToken($file_token, $file_version, $file_variant);
 
         if (!$file_url) exit("There are no downloads available for this token!");
 
         if ($file_url->time_before_expire < time()) {
-            dropFileUrlByToken($file_token);
+            dropFileUrlByToken($file_token, $file_version, $file_variant);
             exit("Token expired, please generate a new link from " . DOWNLOAD_PAGE_URL);
         }
 
