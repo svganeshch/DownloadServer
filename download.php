@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         if (!empty($file->filename) && file_exists(BUILD_FILES_DIRECTORY . '/' . $file_version . '/' . $file_variant . '/' . $file->filename)) {
             $filename = urldecode($file->filename);
-            $filepath = BUILD_FILES_DIRECTORY . '/' . $filename;
+            $filepath = BUILD_FILES_DIRECTORY . '/' . $file_version . '/' . $file_variant . '/' . $filename;
 
             header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename="' . basename($filepath) . '"');
