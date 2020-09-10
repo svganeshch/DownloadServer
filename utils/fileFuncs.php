@@ -87,4 +87,18 @@ function insertFileUrl($file_sha256) {
 
     return $data;
 }
+
+function insertNewFile($file_sha256, $filename, $version, $variant) {
+    global $db_conn;
+
+    $data = [
+        'file_sha256' => $file_sha256,
+        'filename' => $filename
+    ];
+
+    $sql = "INSERT INTO `{$version}_files_{$variant}` (file_sha256, filename) VALUES (:file_sha256, :filename)";
+    $query = $db_conn->prepare($sql);
+    if ($query->execute($data)) return true;
+    else return false;
+}
 ?>
