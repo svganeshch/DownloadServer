@@ -7,7 +7,8 @@ try {
 
     $db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    exit($e->getMessage());
+    error_log($e->getMessage());
+    http_response_code(500);
 }
 
 function getFileBySHA($file_sha256, $version, $variant)
@@ -27,7 +28,8 @@ function getFileBySHA($file_sha256, $version, $variant)
 
         return $file;
     } catch (PDOException $e) {
-        exit($e->getMessage());
+        error_log($e->getMessage());
+        http_response_code(500);
     }
 }
 
@@ -49,7 +51,8 @@ function getFileUrl($file_sha256, $version, $variant)
 
         return $file_url;
     } catch (PDOException $e) {
-        exit($e->getMessage());
+        error_log($e->getMessage());
+        http_response_code(500);
     }
 }
 
@@ -70,7 +73,8 @@ function getFileUrlByToken($token_identifier, $version, $variant)
 
         return $file_url;
     } catch (PDOException $e) {
-        exit($e->getMessage());
+        error_log($e->getMessage());
+        http_response_code(500);
     }
 }
 
@@ -82,7 +86,8 @@ function dropFileUrlByToken($token_identifier, $version, $variant)
         $query = $db_conn->prepare("DELETE FROM `{$version}_file_urls_{$variant}` where token_identifier='{$token_identifier}'");
         $query->execute();
     } catch (PDOException $e) {
-        exit($e->getMessage());
+        error_log($e->getMessage());
+        http_response_code(500);
     }
 }
 
@@ -109,7 +114,8 @@ function insertFileUrl($file_sha256, $version, $variant)
 
         return $data;
     } catch (PDOException $e) {
-        exit($e->getMessage());
+        error_log($e->getMessage());
+        http_response_code(500);
     }
 }
 
@@ -128,6 +134,7 @@ function insertNewFile($file_sha256, $filename, $version, $variant)
         if ($query->execute($data)) return true;
         else return false;
     } catch (PDOException $e) {
-        exit($e->getMessage());
+        error_log($e->getMessage());
+        http_response_code(500);
     }
 }
