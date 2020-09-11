@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (!$file_url) exit("There are no downloads available for this token!");
 
         if ($file_url->time_before_expire < time()) {
-            dropFileUrlByToken($file_token, $file_version, $file_variant);
+            //dropFileUrlByToken($file_token, $file_version, $file_variant);
             exit("Token expired, please generate a new link from " . DOWNLOAD_PAGE_URL);
         }
 
