@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $file_variant = $_GET['variant'];
         $file_url = getFileUrlByToken($file_token, $file_version, $file_variant);
 
-        if (!$file_url) exit("There are no downloads available for this token!");
+        if (!$file_url) exit("Token expired, please generate a new link from " . DOWNLOAD_PAGE_URL);
 
         if ($file_url->time_before_expire < time()) {
             //dropFileUrlByToken($file_token, $file_version, $file_variant);
