@@ -61,7 +61,12 @@ function getFileUrlByToken($token_identifier, $version, $variant)
     try {
         global $db_conn;
 
-        $query = $db_conn->prepare("SELECT * FROM `{$version}_file_urls_{$variant}` where token_identifier='{$token_identifier}' and ip_address='" . $_SERVER['REMOTE_ADDR'] . "'");
+        $ip_whitelist = explode(",", IP_WHITELIST);
+        if (in_array($_SERVER['REMOTE_ADDR'], $ip_whitelist)) {
+            $query = $db_conn->prepare("SELECT * FROM `{$version}_file_urls_{$variant}` where token_identifier='{$token_identifier}'");
+        } else {
+            $query = $db_conn->prepare("SELECT * FROM `{$version}_file_urls_{$variant}` where token_identifier='{$token_identifier}' and ip_address='" . $_SERVER['REMOTE_ADDR'] . "'");
+        }
         $query->execute();
         $results = $query->setFetchMode(PDO::FETCH_OBJ);
 
