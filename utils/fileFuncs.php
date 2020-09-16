@@ -106,10 +106,17 @@ function insertFileUrl($file_sha256, $version, $variant)
     try {
         global $db_conn;
 
+        $ip_whitelist = explode(",", IP_WHITELIST);
+        if (in_array($_SERVER['REMOTE_ADDR'], $ip_whitelist)) {
+            $time_before_expire = (time() + 6969 * 60 * 60);
+        } else {
+            $time_before_expire = (time() + TIME_BEFORE_EXPIRE * 60 * 60);
+        }
+
         $data = [
             'file_sha256' => $file_sha256,
             'token_identifier' => randStr(),
-            'time_before_expire' => (time() + TIME_BEFORE_EXPIRE * 60 * 60),
+            'time_before_expire' => $time_before_expire,
             'ip_address' => $_SERVER['REMOTE_ADDR']
         ];
 
