@@ -62,11 +62,23 @@ function getFileUrlByToken($token_identifier, $version, $variant)
         global $db_conn;
 
         $ip_whitelist = explode(",", IP_WHITELIST);
-        if (in_array($_SERVER['REMOTE_ADDR'], $ip_whitelist)) {
-            $query = $db_conn->prepare("SELECT * FROM `{$version}_file_urls_{$variant}` where token_identifier='{$token_identifier}'");
-        } else {
-            $query = $db_conn->prepare("SELECT * FROM `{$version}_file_urls_{$variant}` where token_identifier='{$token_identifier}' and ip_address='" . $_SERVER['REMOTE_ADDR'] . "'");
+        $whitelist_query = $db_conn->prepare("SELECT * FROM `{$version}_file_urls_{$variant}` where token_identifier='{$token_identifier}'");
+        $whitelist_query->execute();
+        $results = $whitelist_query->setFetchMode(PDO::FETCH_OBJ);
+
+        $file_url = false;
+
+        foreach ($whitelist_query->fetchAll() as $row) {
+            $file_url = $row;
         }
+
+        if ($file_url) {
+            if (in_array($file_url->ip_address, $ip_whitelist)) {
+                return $file_url;
+            }
+        }
+
+        $query = $db_conn->prepare("SELECT * FROM `{$version}_file_urls_{$variant}` where token_identifier='{$token_identifier}' and ip_address='" . $_SERVER['REMOTE_ADDR'] . "'");
         $query->execute();
         $results = $query->setFetchMode(PDO::FETCH_OBJ);
 
@@ -75,8 +87,8 @@ function getFileUrlByToken($token_identifier, $version, $variant)
         foreach ($query->fetchAll() as $row) {
             $file_url = $row;
         }
-
         return $file_url;
+
     } catch (PDOException $e) {
         error_log($e->getMessage());
         http_response_code(500);
