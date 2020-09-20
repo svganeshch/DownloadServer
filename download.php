@@ -29,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     exit(SERVER_DOWN_URL . "download.php?token={$token_identifier}&version={$file_version}&variant={$file_variant}");
                 } else {
-                    exit("No such file exists");
+                    http_response_code(404);
                 }
             } else {
-                exit("No longer available");
+                http_response_code(404);
             }
         }
     }
