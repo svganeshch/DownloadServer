@@ -10,6 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $file_variant = $_POST['variant'];
         $filename = $_POST['filename'];
 
+        $localFile = BUILD_FILES_DIRECTORY . '/' . $file_version . '/' . $file_variant . '/' . $filename;
+        if (!file_exists($localFile)) http_response_code(404);
+
         $file = getFileBySHA($file_sha256, $file_version, $file_variant);
 
         if ($file) {
@@ -67,6 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             header('Content-Disposition: attachment; filename="' . basename($filepath) . '"');
             header('X-Sendfile: ' . $filepath);
             exit;
+        } else {
+            http_response_code(404);
         }
     }
 }
