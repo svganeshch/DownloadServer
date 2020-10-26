@@ -1,7 +1,6 @@
 <?php
 $filepath = explode('/', $_POST['filepath']);
 $userip = $_POST['userip'];
-$mirror1 = $_POST['mirror1'];
 
 $filename = end($filepath);
 $device = $filepath[(count($filepath) - 1) - 1];
@@ -10,7 +9,7 @@ $version = $filepath[(count($filepath) - 1) - 3];
 $file_sha256 = hash_file("sha256", $_POST['filepath']);
 
 $mirror_curl = curl_init();
-curl_setopt($mirror_curl, CURLOPT_URL, $mirror1);
+curl_setopt($mirror_curl, CURLOPT_URL, "/download.php");
 curl_setopt($mirror_curl, CURLOPT_POST, true);
 curl_setopt(
     $mirror_curl,
