@@ -71,6 +71,24 @@ if (!isset($device_files) && empty($device_files)) {
     </div>
   </nav>
   <main>
+    <!-- <div id="progress-modal" class="modal card-content white-text">
+      <div class="modal-content">
+        <h4>Fetching file for download</h4>
+        <div class="center">
+          <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
     <div class="row">
       <div class="container">
         <div class="col s12">
@@ -79,7 +97,7 @@ if (!isset($device_files) && empty($device_files)) {
               <?php foreach ($device_files as $version => $variants) {
                 foreach ($variants as $variant => $builds) {
                   if (empty($builds)) continue;
-                  echo "<h5>".ucfirst($version)."(".ucfirst($variant).")"."</h5>"; ?>
+                  echo "<h5>" . ucfirst($version) . "(" . ucfirst($variant) . ")" . "</h5>"; ?>
                   <table class="dataTable display compact highlight">
                     <thead>
                       <tr>
@@ -93,7 +111,7 @@ if (!isset($device_files) && empty($device_files)) {
                       foreach ($builds as $build) {
                         $filename = explode('/', $build);
                         $filename = end($filename); ?>
-                        <tr id="table-row-file" data-filepath="<?php echo $build ?>" data-userip="<?php echo $_SERVER['REMOTE_ADDR'] ?>">
+                        <tr id="table-row-file" data-filepath="<?php echo $build ?>">
                           <td><?php echo $filename; ?></td>
                           <td><?php echo date("d-m-y h:i", filemtime($build)) ?></td>
                           <td><?php echo number_format((float)filesize($build) / 1000000, 2, '.', '') . " MB" ?>
