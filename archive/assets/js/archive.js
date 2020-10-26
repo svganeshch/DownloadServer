@@ -1,12 +1,10 @@
 $(document).ready(function () {
-    //$('#progress-modal').modal();
     // Datatable
     $('.dataTable').DataTable({
         'order': [
             [1, 'desc']
         ],
-        'sDom': "<'row'<'col s6 right'f>>" +
-            "<'row'<tr>>",
+        'sDom': "<'row'<tr>>",
         'pagingType': 'simple',
         'columnDefs': [{
             'targets': '_all',
@@ -19,7 +17,20 @@ $(document).ready(function () {
         $('#table-row-file').addClass('clicked');
         filepath = $(this).data('filepath');
         userip = $(this).data('userip');
-
+        //Block page while creating link
+        $.blockUI({
+            message: '<div><i class="mdi mdi-loading mdi-spin mdi-48px"> </i> <h1>Creating Link</h1> </div>',
+            overlayCSS: {
+                backgroundColor: '#FFF',
+                opacity: 0.7,
+                cursor: 'wait'
+            },
+            css: {
+                border: 0,
+                padding: 0,
+                backgroundColor: 'transparent'
+            }
+        });
         $.ajax({
             type: 'POST',
             data: {
@@ -27,7 +38,6 @@ $(document).ready(function () {
             },
             url: 'getFile.php',
             beforeSend: function () {
-                //$('#progress-modal').modal('open');
             },
             success: function (data) {
                 fileInfo = data;
@@ -60,7 +70,7 @@ $(document).ready(function () {
                         alert('Failed to fetch file info!');
                     }
                 }
-                //$('#progress-modal').modal('close');
+                $.unblockUI();
                 $('#table-row-file').removeClass('clicked');
             }
         });
