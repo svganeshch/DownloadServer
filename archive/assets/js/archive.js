@@ -15,32 +15,29 @@ $(document).ready(function () {
 
     var arrowMirror = '';
     $('body').on('click', '#table-row-file', function () {
-        alert('ola');
-        fileSHA = $(this).data('sha256');
-        version = $(this).data('version');
-        variant = $(this).data('variant');
-        filename = $(this).data('filename');
+        filepath = $(this).data('filepath');
+        userip = $(this).data('userip');
+        mirror1 = "https://get.mirror1.arrowos.net/download.php"; // Only mirror1 link is used for archive for now
+        mirror2 = "https://get.mirror2.arrowos.net/download.php";
 
         $.ajax({
             type: 'POST',
             data: {
-                'file_sha256': fileSHA,
-                'version': version,
-                'variant': variant,
-                'filename': filename
+                'filepath': filepath,
+                'userip': userip,
+                'mirror1': mirror1,
+                'mirror2': mirror2
             },
-            url: 'http://localhost/download.php',
+            url: 'getFile.php',
             success: function (data) {
                 arrowMirror = data;
-                alert(arrowMirror);
             },
             complete: function (xhr) {
-                alert('yomomma');
                 if (xhr.status === 200) {
-                    alert('yomomma in');
                     if (arrowMirror != null && arrowMirror != '') {
-                        alert('mehhhhhhhhhh')
                         window.location.href = arrowMirror;
+                    } else {
+                        alert('Failed to fetch mirror!');
                     }
                 }
             }

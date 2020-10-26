@@ -4,9 +4,23 @@ define("DB_NAME", "downloads");
 define("DB_USER", "root");
 define("DB_PASSWORD", "");
 
+$VERSIONS = array(
+    'arrow-11.0',
+    'arrow-10.0',
+    'arrow-9.x'
+);
+
+$VARIANTS = array(
+    'official',
+    'experiments',
+    'community',
+    'community_experiments'
+);
+
 define("TIME_BEFORE_EXPIRE", 2); // in hours
 define("BUILD_FILES_DIRECTORY", "./builds");
-define("SERVER_DOWN_URL", "http://localhost/downloader/");
+define("ARCHIVE_SERVER_URL", "http://localhost/archive/");
+define("SERVER_DOWN_URL", "http://localhost/");
 define("DOWNLOAD_PAGE_URL", "https://example.com");
 
 define("IP_WHITELIST", "100.200.3.4, 200.300.4.5"); // Mention IP's to whitelist/exclude from IP bound url checks

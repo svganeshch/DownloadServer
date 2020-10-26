@@ -1,2 +1,0 @@
-RewriteEngine on
-RewriteRule ^archive/([A-Za-z0-9]+)/([a-z0-9-.]+)/([a-z_]+)(/)?$ /archive/archive.php?token=$1&version=$2&variant=$3 
