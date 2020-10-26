@@ -4,7 +4,7 @@ include_once "$path" . "/config/dbconn.php";
 include_once "$path" . "/utils/fileFuncs.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (isset($_POST['archive']) && $_POST['archive'] == "yes" && isset($_POST['device'])) {
+  if (isset($_POST['device'])) {
     $device = $_POST['device'];
     $archive_token = getArchivetoken();
 
