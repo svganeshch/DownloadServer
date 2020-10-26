@@ -79,7 +79,7 @@ if (!isset($device_files) && empty($device_files)) {
               <?php foreach ($device_files as $version => $variants) {
                 foreach ($variants as $variant => $builds) {
                   if (empty($builds)) continue;
-                  echo "<h5>".ucfirst($variant)."</h5>"; ?>
+                  echo "<h5>".ucfirst($version)."(".ucfirst($variant).")"."</h5>"; ?>
                   <table class="dataTable display compact highlight">
                     <thead>
                       <tr>
