@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // Datatable
+  // Datatable
     $('.dataTable').DataTable({
         'order': [
             [1, 'desc']
@@ -17,9 +17,9 @@ $(document).ready(function () {
         $('#table-row-file').addClass('clicked');
         filepath = $(this).data('filepath');
         userip = $(this).data('userip');
-        //Block page while creating link
+        //Block page while creating link 
         $.blockUI({
-            message: '<div><i class="mdi mdi-loading mdi-spin mdi-48px"> </i> <h1>Creating Link</h1> </div>',
+            message: '<h1><i class="mdi mdi-loading mdi-spin mdi-48px"> </i>Wait</h1>',
             overlayCSS: {
                 backgroundColor: '#FFF',
                 opacity: 0.7,
