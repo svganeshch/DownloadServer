@@ -80,6 +80,20 @@ if (!isset($device_files) && empty($device_files)) {
                 foreach ($variants as $variant => $builds) {
                   if (empty($builds)) continue;
                   echo "<h5>" . ucfirst($version) . "(" . ucfirst($variant) . ")" . "</h5>"; ?>
+                  <div style="padding-left: 0px;" class="row">
+                    <div class="col s12 m12 l12 ">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <ins class="adsbygoogle"
+                            style="display:block"
+                            data-ad-format="fluid"
+                            data-ad-layout-key="-gw-3+1f-3d+2z"
+                            data-ad-client="ca-pub-5568741006164863"
+                            data-ad-slot="9060655737"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    </div>
+                  </div>
                   <table class="dataTable display compact highlight">
                     <thead>
                       <tr>
