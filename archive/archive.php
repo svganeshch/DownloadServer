@@ -63,7 +63,9 @@ if (!isset($device_files) && empty($device_files)) {
   <title>ArrowOS | Archive</title>
 </head>
 
-<body>
+<body style="visibility: hidden !important;">
+  <div id="babasbmsgx" style="visibility: visible !important;">Please disable your adblock and script blockers to view
+    this page</div>
   <nav class="navbar z-depth-0 center" role="navigation">
     <div class="nav-wrapper container">
       <a href="#!" class="left brand-logo"><img class="navlogo" src="assets/images/ArrowLogo.svg" alt="Arrow Logo" /></a>
@@ -82,16 +84,11 @@ if (!isset($device_files) && empty($device_files)) {
                   echo "<h5>" . ucfirst($version) . "(" . ucfirst($variant) . ")" . "</h5>"; ?>
                   <div style="padding-left: 0px;" class="row">
                     <div class="col s12 m12 l12 ">
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <ins class="adsbygoogle"
-                            style="display:block"
-                            data-ad-format="fluid"
-                            data-ad-layout-key="-gw-3+1f-3d+2z"
-                            data-ad-client="ca-pub-5568741006164863"
-                            data-ad-slot="9060655737"></ins>
-                    <script>
+                      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                      <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-gw-3+1f-3d+2z" data-ad-client="ca-pub-5568741006164863" data-ad-slot="9060655737"></ins>
+                      <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                      </script>
                     </div>
                   </div>
                   <table class="dataTable display compact highlight">
@@ -145,6 +142,7 @@ if (!isset($device_files) && empty($device_files)) {
     </div>
   </footer>
 
+  <script src="assets/js/blockAdBlock.js"></script>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/materialize.min.js"></script>
   <script src="assets/datatables/datatables.min.js"></script>
