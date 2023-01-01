@@ -38,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     foreach ($VERSIONS as $version) {
       foreach ($VARIANTS as $variant) {
-        $builds_path = "builds" . DIRECTORY_SEPARATOR . $version . DIRECTORY_SEPARATOR . $variant . DIRECTORY_SEPARATOR . $device;
-        $device_files[$version][$variant] = getBuilds($builds_path);
+        $builds_path = "../builds" . DIRECTORY_SEPARATOR . $version . DIRECTORY_SEPARATOR . $variant . DIRECTORY_SEPARATOR . $device;
+	$device_files[$version][$variant] = getBuilds($builds_path);
       }
     }
   }
